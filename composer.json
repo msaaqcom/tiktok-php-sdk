@@ -1,6 +1,6 @@
 {
     "name": "msaaq/tiktok-php-sdk",
-    "version": "1.0.1",
+    "description": "TikTok Events API PHP Wrapper",
     "type": "library",
     "license": "MIT",
     "keywords": [
