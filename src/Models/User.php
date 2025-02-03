@@ -7,17 +7,21 @@ class User extends Model
     /**
      * TikTok Click ID
      */
-    public string|null $ttclid = '';
+    public ?string $ttclid = '';
 
     /**
      * Cookie ID (_ttp).
      */
-    public string|null $ttp = '';
-    public string|null $ip = '';
-    public string|null $user_agent = '';
+    public ?string $ttp = '';
+
+    public ?string $ip = '';
+
+    public ?string $user_agent = '';
 
     public array $email;
+
     public array $phone;
+
     public array $external_id;
 
     public function setClickId(?string $ttclid): static

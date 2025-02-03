@@ -2,10 +2,6 @@
 
 namespace Msaaq\TikTok\Support;
 
-use Illuminate\Http\Client\PendingRequest;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Http;
-
 class Helper
 {
     public static function strCamel($value)

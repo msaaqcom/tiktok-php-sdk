@@ -7,12 +7,16 @@ use Msaaq\TikTok\Enums\EventName;
 class Event extends Model
 {
     public EventName $event;
+
     public string|int $event_time;
+
     public string $event_id;
 
-    public User|null $user = null;
+    public ?User $user = null;
+
     public Property $properties;
-    public Page|null $page = null;
+
+    public ?Page $page = null;
 
     public function setEventName(EventName $value): static
     {

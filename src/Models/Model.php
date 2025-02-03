@@ -40,14 +40,15 @@ class Model
         $trace = debug_backtrace();
         trigger_error(
             'Undefined property via __get(): '.$name.
-            ' in '.$trace[0]['file'].
-            ' on line '.$trace[0]['line'],
-            E_USER_NOTICE);
+                ' in '.$trace[0]['file'].
+                ' on line '.$trace[0]['line'],
+            E_USER_NOTICE
+        );
 
         return null;
     }
 
-    private function getPropertyType(string $property): string|null
+    private function getPropertyType(string $property): ?string
     {
         return (new ReflectionProperty($this, $property))->getType()?->getName();
     }
@@ -109,7 +110,7 @@ class Model
     public function hashArrayValue(array $array): array
     {
         foreach ($array as $key => $value) {
-            $array[$key] = hash('sha256', $value);
+            $array[$key] = hash('sha256', (string) $value);
         }
 
         return $array;

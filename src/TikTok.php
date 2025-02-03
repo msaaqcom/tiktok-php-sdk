@@ -19,4 +19,9 @@ class TikTok
     {
         return (new EventRequest($this->http))->setPixelCode($this->pixelId);
     }
+
+    public function client(): PendingRequest
+    {
+        return $this->http;
+    }
 }

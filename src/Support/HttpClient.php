@@ -1,5 +1,4 @@
 <?php
-
 namespace Msaaq\TikTok\Support;
 
 use Illuminate\Http\Client\PendingRequest;

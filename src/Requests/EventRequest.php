@@ -2,8 +2,11 @@
 
 namespace Msaaq\TikTok\Requests;
 
+use Exception;
 use Illuminate\Http\Client\PendingRequest;
 use Msaaq\TikTok\Enums\EventSource;
+use Msaaq\TikTok\Exceptions\AccessTokenIncorrectOrRevokedException;
+use Msaaq\TikTok\Exceptions\NoPermissionException;
 use Msaaq\TikTok\Models\Event;
 
 class EventRequest
@@ -15,11 +18,9 @@ class EventRequest
      */
     public string $event_source_id;
 
-    public string|null $test_event_code = null;
+    public ?string $test_event_code = null;
 
-    public function __construct(public PendingRequest $http)
-    {
-    }
+    public function __construct(public PendingRequest $http) {}
 
     public function setPixelCode(string $code): static
     {
@@ -44,7 +45,7 @@ class EventRequest
 
     /**
      * @param  Event|Event[]  $events
-     * @return array
+     *
      * @throws \Exception
      */
     public function execute(Event|array $events): array
@@ -63,7 +64,13 @@ class EventRequest
         ]);
 
         $request->onError(function ($request) {
-            throw new \Exception($request->json('message'));
+            $errorCode = $request->json('code');
+
+            throw match ($errorCode) {
+                40001 => new NoPermissionException($request->json('message')),
+                40105 => new AccessTokenIncorrectOrRevokedException($request->json('message')),
+                default => new Exception($request->json('message'), $errorCode),
+            };
         });
 
         return $request->json();

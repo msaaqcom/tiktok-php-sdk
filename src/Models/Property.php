@@ -9,15 +9,19 @@ class Property extends Model
      */
     public array $contents;
 
-    public string|null $content_type = '';
-    public string|null $currency = '';
-    public float|null $value = null;
+    public ?string $content_type = '';
 
-    public string|null $query = '';
-    public string|null $description = '';
+    public ?string $currency = '';
+
+    public ?float $value = null;
+
+    public ?string $query = '';
+
+    public ?string $description = '';
+
     public string|int|null $order_id = '';
-    public string|int|null $shop_id = '';
 
+    public string|int|null $shop_id = '';
 
     /**
      * @param  Content[]  $value
@@ -30,35 +34,35 @@ class Property extends Model
         return $this;
     }
 
-    public function setContentType(string|null $value): static
+    public function setContentType(?string $value): static
     {
         $this->content_type = $value ?? '';
 
         return $this;
     }
 
-    public function setCurrency(string|null $value): static
+    public function setCurrency(?string $value): static
     {
         $this->currency = $value ?? '';
 
         return $this;
     }
 
-    public function setValue(float|null $value): static
+    public function setValue(?float $value): static
     {
         $this->value = $value ?? '';
 
         return $this;
     }
 
-    public function setQuery(string|null $value): static
+    public function setQuery(?string $value): static
     {
         $this->query = $value ?? '';
 
         return $this;
     }
 
-    public function setDescription(string|null $value): static
+    public function setDescription(?string $value): static
     {
         $this->description = $value ?? '';
 
@@ -67,7 +71,7 @@ class Property extends Model
 
     public function setOrderId(string|int|null $value): static
     {
-        $this->order_id = $value ?? '';
+        $this->order_id = (string) $value ?? '';
 
         return $this;
     }
