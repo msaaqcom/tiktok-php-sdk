@@ -68,8 +68,10 @@ $eventB->setEventName(\Msaaq\TikTok\Enums\EventName::PLACE_AN_ORDER)
 
 ```php
 $eventRequest = $tiktok->events()
-            ->setEventSource(\Msaaq\TikTok\Enums\EventSource::WEB)
-            ->setTestEventCode($testCode); // optional 
+            ->setEventSource(\Msaaq\TikTok\Enums\EventSource::WEB);
+if (!empty($testCode)) {
+       $eventRequest->setTestEventCode($testCode); // optional 
+}
 ```
 
 ### Sending a single event

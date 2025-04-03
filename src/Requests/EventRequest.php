@@ -55,13 +55,18 @@ class EventRequest
             $events[$key] = $event->toArray();
         }
 
-        $request = $this->http->post('/event/track/', [
+        $requestData = [
             'event_source' => $this->event_source->value,
             'event_source_id' => $this->event_source_id,
-            'test_event_code' => $this->test_event_code,
 
             'data' => $events,
-        ]);
+        ];
+
+        if (!empty($this->test_event_code)) {
+            $requestData['test_event_code'] = $this->test_event_code;
+        }
+
+        $request = $this->http->post('/event/track/', $requestData);
 
         $request->onError(function ($request) {
             $errorCode = $request->json('code');
