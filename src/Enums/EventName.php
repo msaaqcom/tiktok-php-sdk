@@ -18,4 +18,6 @@ enum EventName: string
     case SUBMIT_FORM = 'SubmitForm';
     case COMPLETE_REGISTRATION = 'CompleteRegistration';
     case SUBSCRIBE = 'Subscribe';
+    case START_TRIAL = 'StartTrial';
+    case PURCHASE = 'Purchase';
 }
